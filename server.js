@@ -21,9 +21,9 @@ wss.on('connection', function connection(ws) {
     ws.send('world');
     
     // 发送方->接收方：ping
-    setInterval(() => {
-      ws.ping('', false, true); // 心跳
-    }, 5000);
+    // setInterval(() => {
+    //   ws.ping('', false, true); // 心跳
+    // }, 10000);
 });
 
 app.get('/', function (req, res) {

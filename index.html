@@ -12,9 +12,48 @@
   ws.onopen = function () {
     console.log('client: ws connection is open');
     ws.send('hello');
+
+    // send blob
+    // var file = document.querySelector('input[type="file"]').files[0];
+    // ws.send(file);
+
+    // Sending canvas ImageData as ArrayBuffer
+    // var img = canvas_context.getImageData(0, 0, 400, 320);
+    // var binary = new Uint8Array(img.data.length);
+    // for (var i = 0; i < img.data.length; i++) {
+    //   binary[i] = img.data[i];
+    // }
+    // ws.send(binary.buffer);
+    // if (socket.bufferedAmount === 0) {
+    //   // 发送完毕
+    // } else {
+    //   // 发送还没结束
+    // }
   };
-  ws.onmessage = function (e) {
-    console.log('client: received %s', e.data);
+  // ws.binaryType = 'blob';
+  // ws.binaryType = 'arraybuffer';
+  ws.onmessage = function (evt) {
+    if (typeof evt.data === String) {
+      console.log("Received data string");
+    }
+    if (evt.data instanceof ArrayBuffer){
+      var buffer = event.data;
+      console.log("Received arraybuffer");
+    }
+    console.log('client: received %s', evt.data);
+  };
+
+  ws.onclose = function(evt) {
+    console.log("Connection closed.");
+  };
+
+  socket.onerror = function(evt) {
+    // handle error event
+    console.log("error: ", evt);
+  };
+
+  window.onbeforeunload = function () {
+    ws.close();
   };
 </script>
 
