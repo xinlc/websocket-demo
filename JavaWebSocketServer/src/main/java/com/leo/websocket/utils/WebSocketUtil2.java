@@ -20,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint(value = "/websocket2")
 @Component
 public class WebSocketUtil2 {
+	// 跟客户端约定心跳包信息
 	private final String PING_MSG = "heartbeat";
 	private final String PONG_MSG = "pong";
 
